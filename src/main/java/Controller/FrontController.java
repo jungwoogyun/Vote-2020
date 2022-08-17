@@ -20,7 +20,7 @@ public class FrontController extends HttpServlet{
 		 
 		 map.put("/main.do", new MainController());
 		 map.put("/memberList.do", new MemberListController());
-		 map.put("/voteMember.do", null);
+		 map.put("/voteMember.do", new VoteMemberController());
 		 map.put("/voteList.do", null);
 		 map.put("/voteResult.do", null);
 	}
