@@ -18,7 +18,7 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>FrontController</servlet-name>
+		<servlet-name>VoteController</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
