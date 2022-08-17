@@ -18,7 +18,7 @@ public class FrontController extends HttpServlet{
 	public void init() throws ServletException {
 		 map = new HashMap();
 		 
-		 map.put("/main.do", null);
+		 map.put("/main.do", new MainController());
 		 map.put("/memberList.do", new MemberListController());
 		 map.put("/voteMember.do", null);
 		 map.put("/voteList.do", null);
