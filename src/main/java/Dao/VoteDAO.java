@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import Dto.MemberDTO;
 import Dto.PartyDTO;
+import Dto.VoteDTO;
 
 public class VoteDAO {
 	Connection conn = null;
@@ -15,10 +16,19 @@ public class VoteDAO {
 	ResultSet rs = null;	 
 	
 	public static Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.OracleDriver");
+		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection
 				("jdbc:oracle:thin:@//localhost:1521/xe","system","1234");
 		return con;
+	}
+	
+	public VoteDAO(){	
+		try {
+			conn = getConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public ArrayList<MemberDTO> getMemberList(){
@@ -26,7 +36,7 @@ public class VoteDAO {
 		MemberDTO dto=null;
 		try {
 			
-			Connection conn = getConnection();
+		 
 			ps = conn.prepareStatement("select * from tbl_member_202005");
 			rs = ps.executeQuery();
 			if(rs!=null)
@@ -47,7 +57,7 @@ public class VoteDAO {
 		}catch(Exception e) {
 			try{rs.close();}catch(Exception e1) {}
 			try{ps.close();}catch(Exception e1) {}
-			try{conn.close();}catch(Exception e1) {}	
+		 
 		}
 		return list;
 		
@@ -60,7 +70,7 @@ public class VoteDAO {
 		
 	try {
 			
-			Connection conn = getConnection();
+		 
 			ps = conn.prepareStatement("select * from tbl_party_202005");
 			rs = ps.executeQuery();
 			if(rs!=null)
@@ -82,10 +92,35 @@ public class VoteDAO {
 		}catch(Exception e) {
 			try{rs.close();}catch(Exception e1) {}
 			try{ps.close();}catch(Exception e1) {}
-			try{conn.close();}catch(Exception e1) {}	
+		 
 		}
 		return list;
 	}
 	
+	public int insertvoteinfo(VoteDTO dto) {
+		
+		int result = 0;
+		try {
+			
+		 
+			ps = conn.prepareStatement("insert into tbl_vote_202005 values(?,?,?,?,?,?)");
+			ps.setString(1, dto.getV_jumin());
+			ps.setString(2, dto.getV_name());
+			ps.setString(3, dto.getN_no());
+			ps.setString(4, dto.getV_time());
+			ps.setString(5, dto.getV_area());
+			ps.setString(6, dto.getV_confirm());
+		 
+			result = ps.executeUpdate();
+			
+			 
+			
+		}catch(Exception e) {
+			try{ps.close();}catch(Exception e1) {e1.printStackTrace();}
+		 
+			
+		}
+		return result;
+	}
 
 }

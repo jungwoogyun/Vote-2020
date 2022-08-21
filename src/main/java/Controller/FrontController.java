@@ -27,6 +27,9 @@ public class FrontController extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8"); //요청 관련 인코딩 처리
+		resp.setContentType("text/html;charset=utf-8"); //응답 관련 인코딩 처리
+		
 		String url = req.getRequestURI();
 		SubController sub = map.get(url);
 		System.out.println("URL : " + url);

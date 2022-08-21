@@ -74,7 +74,7 @@
 
 	<div style="width:80%;margin:100px auto;">
 		<h2>투 표 하 기</h2>
-		<form method=post action="/voteMember.do" name=voteform>
+		<form method=post  name=voteform  onsubmit="return false">
 			<table align=center  >
 				<tr>
 					<td>주민번호</td>
@@ -112,8 +112,9 @@
 						<input type="radio"  name="v_confirm" value="N"> 미확인 
 					</td>
 				</tr>
+				<input type=hidden name=flag value=true>
 				<tr style="text-align:center;">
-					<td colspan=2><button onclick="inputcheck()">투표하기</button><button onclick="reset">다시하기</button></td>
+					<td colspan=2><button onclick="inputcheck()">투표하기</button><button onclick="resetfunc()">다시하기</button></td>
 				</tr>
 			</table>
 		</form>
@@ -160,17 +161,37 @@ HRDKOREA Copyright@2015 All rights reserved. Human Resources Development Service
 			alert("투표장소가 입력되지 않았습니다!");
 			f.v_area.focus();
 			return false;
-		}
-		if(!f.v_confirm.checked){
+		}	
+		if(f.v_confirm.value.trim()==""){
 			alert("유권자확인이 선택되지 않았습니다!");
-			f.v_jumin.focus();
+			f.v_confirm.focus();
 			return false;
 		}
+			
+		f.action="/voteMember.do";
 		f.submit();
 		
-		
+
 	}
 
+	function resetfunc()
+	{
+		
+		var f = document.voteform;
+		var result = confirm("정보를 지우고 처음부터 다시 입력합니다!");
+
+		if(result==true)
+		{
+			f.reset();	
+			f.v_jumin.focus()	 
+			return ;
+		}
+		else 
+		{
+			return ;	
+		}
+		
+	}
 </script>
 
 
