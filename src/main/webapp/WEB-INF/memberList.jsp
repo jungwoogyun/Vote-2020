@@ -65,13 +65,6 @@
 	<% 
 		ArrayList<MemberDTO> mlist = (ArrayList<MemberDTO>)request.getAttribute("mlist");
 		ArrayList<PartyDTO> plist = (ArrayList<PartyDTO>)request.getAttribute("plist");
-		
-		for(int i=0;i<mlist.size();i++){
-			System.out.println(mlist.get(i));
-		}
-		for(int i=0;i<plist.size();i++){
-			System.out.println(plist.get(i));
-		}
 	%>
 	<style>
 		td,th{border : 1px solid gray;}

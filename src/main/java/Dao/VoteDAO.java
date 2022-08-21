@@ -122,5 +122,37 @@ public class VoteDAO {
 		}
 		return result;
 	}
+	
+	public ArrayList<VoteDTO> getVoteList() {
+		ArrayList<VoteDTO> list = new ArrayList();
+		VoteDTO dto=null;
+		try {
+			
+		 
+			ps = conn.prepareStatement("select * from tbl_vote_202005 where v_area='제1투표장'");
+			rs = ps.executeQuery();
+			if(rs!=null)
+			{
+				while(rs.next())
+				{
+					dto=new VoteDTO();
+					dto.setN_no(rs.getString("m_no"));
+					dto.setV_area(rs.getString("v_area"));
+					dto.setV_confirm(rs.getString("v_confirm"));
+					dto.setV_jumin(rs.getString("v_jumin"));
+					dto.setV_name(rs.getString("v_name"));
+					dto.setV_time(rs.getString("v_time"));
+					list.add(dto);
+				}
+			}
+			
+		}catch(Exception e) {
+			try{rs.close();}catch(Exception e1) {}
+			try{ps.close();}catch(Exception e1) {}
+		 
+		}
+		return list;
+		
+	}
 
 }
