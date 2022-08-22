@@ -154,5 +154,27 @@ public class VoteDAO {
 		return list;
 		
 	}
+	
+	public String getTotalVote(String m_no)
+	{
+			String result = null;
+			
+			try {
+				ps = conn.prepareStatement("select count(*) from tbl_vote_202005 where m_no=?");
+				ps.setString(1, m_no);
+				rs = ps.executeQuery();
+				if(rs!=null)
+				{
+					rs.next();
+					result = rs.getString(1);	
+				}
+			
+			}catch(Exception e) {
+				try{rs.close();}catch(Exception e1) {}
+				try{ps.close();}catch(Exception e1) {}
+			 
+			}
+			return result;
+	}
 
 }
